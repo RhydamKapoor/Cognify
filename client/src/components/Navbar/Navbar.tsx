@@ -1,4 +1,5 @@
 'use client'
+import { DataContext } from '@/context/Data'
 import { ThemeContext } from '@/context/Theme'
 import { Moon, Sun } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
@@ -8,15 +9,21 @@ import React, { useContext, useEffect, useState } from 'react'
 
 export default function Navbar() {
     const path = usePathname()
-    
+    const data = useContext(DataContext)
     const [showNavbar, setShowNavbar] = useState(false)
     const themeOptions = useContext(ThemeContext)
-    console.log(themeOptions);
+    console.log(path);
+    
     
     useEffect(() => {
         if(path === "/") {
             setShowNavbar(false)
-        } else {
+        }
+        if(path === "/login" || path === "/register") {
+            setShowNavbar(true)
+            data?.setTitleName("Cognify")
+        }
+        else {
             setShowNavbar(true)
         }
     }, [path]);
@@ -37,7 +44,7 @@ export default function Navbar() {
                         <div className='flex justify-between items-center gap-4 w-full'>
                             <div className='flex items-center gap-4'>
                                 <Link href='/'>
-                                    <h1 className='text-3xl font-bold'>Cognify</h1>
+                                    <h1 className='text-3xl font-bold'>{data?.titleName}</h1>
                                 </Link>
                             </div>
             

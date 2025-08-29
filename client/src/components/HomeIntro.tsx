@@ -1,11 +1,14 @@
 'use client'
 import { motion } from 'motion/react'
 import SwipeRedirect from './SwipingEffect/SwipeRedirect'
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '@/context/Auth';
 
 export default function HomeIntro() {
+  const data = useContext(AuthContext);
+  console.log(data?.user);
   return (
     <>
-      
       <motion.div className="flex flex-col items-center"
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}

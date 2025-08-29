@@ -1,16 +1,11 @@
 import RegisterComp from '@/components/AuthComp/RegisterComp'
+import Navbar from '@/components/Navbar/Navbar'
 
 export default function page() {
   return (
-    <div className='flex flex-col items-center justify-center h-full'>
-      <div className="flex flex-col rounded-xl p-5 shadow-xl bg-info/10 gap-y-10 w-1/3">
-        <div className='flex flex-col items-center justify-center'>
-          <h1 className='text-sm font-bold text-base-content/40 flex flex-col items-center'>Cognify
-            <span className="text-3xl text-base-content/100">
-              Signup</span>
-          </h1>
-        </div>
-
+    <div className='flex flex-col h-screen'>
+      <Navbar />
+      <div className="flex flex-col items-center justify-center h-[calc(100vh-86px)] overflow-hidden">
         <RegisterComp />
       </div>
     </div>
