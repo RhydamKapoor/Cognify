@@ -2,7 +2,7 @@
 import { Eye, EyeClosed } from 'lucide-react';
 import React, { useState } from 'react'
 import SwipeRedirect from '../SwipingEffect/SwipeRedirect';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { motion } from 'motion/react';
 import toast from 'react-hot-toast';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -31,8 +31,9 @@ export default function RegisterComp() {
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`, data);
       toast.success("Registered successfully", { id: toastId });
-    } catch (error : any) {
-      toast.error(error.response.data.message, { id: toastId });
+    } catch (error: unknown) {
+      const err = error as AxiosError<{ message: string }>;
+      toast.error(err.response?.data?.message || "Something went wrong", { id: toastId });
     }
     
   }

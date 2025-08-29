@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import axiosInstance from '@/app/axiosInstance';
+import { AxiosError } from 'axios';
 
 type LoginForm = {
   email: string;
@@ -28,8 +29,9 @@ export default function LoginComp() {
       const response = await axiosInstance.post(`/auth/login`, data);
       toast.success("Logged in successfully", { id: toastId });
       router.push('/dashboard');  
-    } catch (error : any) {
-      toast.error(error.response.data.message, { id: toastId });
+    } catch (error: unknown) {
+      const err = error as AxiosError<{ message: string }>;
+      toast.error(err.response?.data?.message || "Something went wrong", { id: toastId });
     }
   }
   return (

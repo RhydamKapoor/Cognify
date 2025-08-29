@@ -1,21 +1,11 @@
 import type { Metadata } from "next";
-import { Gabarito, Geist, Geist_Mono, Varela_Round } from "next/font/google";
+import { Gabarito, Varela_Round } from "next/font/google";
 import "./globals.css";
 import ThemeContext from "@/context/Theme";
-import Navbar from "@/components/Navbar/Navbar";
 import { ToasterClient } from "@/components/ToasterClient";
 import Auth from "@/context/Auth";
 import Data from "@/context/Data";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const varelaRound = Varela_Round({
   variable: "--font-varela",

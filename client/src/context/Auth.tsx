@@ -1,5 +1,6 @@
 'use client'
 import axiosInstance from "@/app/axiosInstance";
+import { AxiosError } from "axios";
 import { createContext, useEffect, useState } from "react";
 
 interface AuthDetails {
@@ -20,8 +21,9 @@ export default function Auth({children}: {children: React.ReactNode}) {
             try {
                 const response = await axiosInstance.get("/profile/me");
                 setUser(response?.data?.data);
-            } catch (error) {
-                console.log(error);
+            } catch (error: unknown) {
+              const err = error as AxiosError<{ message: string }>;
+              console.log();
             }
         }
         fetchUser();

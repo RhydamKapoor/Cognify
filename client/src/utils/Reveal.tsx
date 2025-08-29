@@ -1,8 +1,15 @@
 'use client'
-import { motion, useAnimation, useInView } from "motion/react"
+import { HTMLMotionProps, motion, useAnimation, useInView } from "motion/react"
 import { useEffect, useRef } from "react"
 
-export default function Reveal({children, axis, axisValue ,...props}: {children: React.ReactNode, axis: string, axisValue: number, props: any}) {
+
+type RevealProps = {
+  children: React.ReactNode
+  axis: "x" | "y"
+  axisValue: number
+} & HTMLMotionProps<"div">
+
+export default function Reveal({children, axis, axisValue ,...props}: RevealProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, {once: true});
 
@@ -12,7 +19,7 @@ export default function Reveal({children, axis, axisValue ,...props}: {children:
     if(isInView){
       mainControls.start('visible')
     }
-  }, [isInView]);
+  }, [isInView, mainControls]);
   return (
     <div ref={ref} className='relative w-fit'>
       <motion.div 
